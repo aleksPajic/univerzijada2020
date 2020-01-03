@@ -5,3 +5,16 @@
     height: 4.5rem;  
     background-color: #5B762D;
 }
+
+#content-div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

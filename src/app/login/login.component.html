@@ -1,0 +1,24 @@
+<div class="row flex-center">
+    <div class="col-6">
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="usernameInput">Korisničko ime</label>
+                <input type="text" [(ngModel)]="username" class="form-control" 
+                        name="username" id="usernameInput" aria-describedby="emailHelp" placeholder="Unesite korisničko ime">
+            </div>
+            <div class="form-group">
+                <label for="passwordInput">Lozinka</label>
+                <input type="password" [(ngModel)]="password" class="form-control" 
+                        name="password" id="passwordInput" placeholder="Lozinka">
+            </div>
+        
+            <div *ngIf='errorMessage' class="alert alert-danger" role="alert">
+                {{errorMessage}}
+             </div>
+            <div class="flex-center">
+                <button type="submit" (click)="login()" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+  

@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand-md navbar-light" id="navMenuComponent">
+    <a href="/" class="navbar-brand">
+        <img src="../../assets/logo.png">
+    </a>
+    <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarMenu">
+        <div class="navbar-nav ml-auto" *ngIf="headerView === 'none'">
+            <a href="register" class="nav-item nav-link">Registracija</a>
+            <a href="login" class="nav-item nav-link active" tabindex="-1">Uloguj se</a>
+        </div>
+
+        <div class="navbar-nav ml-auto" *ngIf="headerView === 'student'">
+            <a href="#" class="nav-item nav-link">Turistički sadržaj</a>
+            <a href="#" class="nav-item nav-link">Smeštaj</a>
+            <a href="#" class="nav-item nav-link">Utakmice</a>
+            <a href="#" class="nav-item nav-link active" tabindex="-1">Moj profil</a>
+        </div>
+
+        <div class="navbar-nav ml-auto" *ngIf="headerView === 'organisator'">
+            <a href="#" class="nav-item nav-link">Hale</a>
+            <a href="#" class="nav-item nav-link">Zahtevi</a>
+            <a href="#" class="nav-item nav-link active" tabindex="-1">Moj profil</a>
+        </div>
+    </div>
+</nav>

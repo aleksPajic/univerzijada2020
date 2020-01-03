@@ -1,0 +1,12 @@
+#navMenuComponent{
+    background-color: #98B663;
+    font-weight: 700;
+}
+
+a.nav-item.nav-link.active:hover{
+    font-size: larger;
+}
+
+a.nav-item.nav-link.active{
+    font-size: large;
+}
