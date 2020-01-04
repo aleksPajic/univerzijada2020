@@ -16,13 +16,29 @@
             <a href="#" class="nav-item nav-link">Turistički sadržaj</a>
             <a href="#" class="nav-item nav-link">Smeštaj</a>
             <a href="#" class="nav-item nav-link">Utakmice</a>
-            <a href="#" class="nav-item nav-link active" tabindex="-1">Moj profil</a>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Moj profil
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" (click)="profile()">Pregled profila</a>
+                    <a class="dropdown-item" (click)="logout()">Odjavi se</a>
+                </div>
+            </div>
         </div>
 
         <div class="navbar-nav ml-auto" *ngIf="headerView === 'organisator'">
             <a href="#" class="nav-item nav-link">Hale</a>
             <a href="#" class="nav-item nav-link">Zahtevi</a>
-            <a href="#" class="nav-item nav-link active" tabindex="-1">Moj profil</a>
+            <div class="dropdown show">
+                <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Moj profil
+                </a>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <a class="dropdown-item" (click)="profile()" >Pregled profila</a>
+                    <a class="dropdown-item" (click)="logout()" >Odjavi se</a>
+                </div>
+            </div>
         </div>
     </div>
 </nav>

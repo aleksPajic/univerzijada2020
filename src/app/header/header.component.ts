@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/services/user.service';
+import { User } from 'src/models/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'pki-header',
@@ -10,14 +12,31 @@ export class HeaderComponent implements OnInit {
 
   private headerView: string = "none";
 
-  constructor(private userService: UserService) { }
+  constructor(public userService: UserService, private router: Router) {
+    this.userService.setHeaderComponent(this);
+    console.log("Created header object!");
+   }
 
   ngOnInit() {
-    this.userService.setHeaderComponent(this);
+    let user:User = this.userService.getCurrentUser();
+    if(user){
+      this.changeHeaderView(user.type);
+    }
+    console.log("Created header!");
   }
 
   changeHeaderView(newView:string){
     this.headerView = newView;
+  }
+
+  profile(){
+    this.router.navigate(["profile"]);
+  }
+
+  logout(){
+    this.userService.logout();
+    this.headerView = "none";
+    this.router.navigate(["login"]);
   }
 
 }

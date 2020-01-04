@@ -32,18 +32,20 @@ export class UserService {
     }
   ]
 
-  private currentUser: User = null;
+  private currentUser: User;
   private headerComponent: HeaderComponent;
 
-  constructor() { }
+  constructor() { 
+    console.log("User service created!");
+  }
 
   isUserLogged(): boolean{
-    return this.currentUser != null;
+    return this.getCurrentUser() != null;
   }
 
   private setCurrentUser(user: User){
     localStorage.setItem(UserService.USER_INFO_STORAGE_KEY, JSON.stringify(user));
-    this.headerComponent.setUser(user);
+    this.currentUser = user;
   }
 
   getCurrentUser(){
@@ -56,6 +58,7 @@ export class UserService {
   login(username: string, password: string){
     this.currentUser = this.getUserForUsernameAndPassword(username, password);
     this.setCurrentUser(this.currentUser);
+    this.headerComponent.changeHeaderView(this.currentUser.type);
   }
 
   getUserForUsernameAndPassword(username: string, password: string): User{
@@ -66,8 +69,16 @@ export class UserService {
     return result.length > 0 ? result[0] : null;
   }
 
-  validateLogin(){
+  userExists(username: string, password: string): boolean{
+    var result = UserService.loginUsers.filter((user)=>{
+      return user.username === username && user.password === password;
+    });
 
+    return result.length > 0;
+  }
+
+  logout(){
+    this.setCurrentUser(null);
   }
 
   setHeaderComponent(headerComponent: HeaderComponent) {

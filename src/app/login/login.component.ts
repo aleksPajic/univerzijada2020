@@ -13,16 +13,30 @@ export class LoginComponent implements OnInit {
   username: string;
   password: string;
 
-  constructor(private userService: UserService, private router: Router) { 
+  constructor(public userService: UserService, private router: Router) { 
     this.errorMessage = null;
+    this.username = null;
+    this.password = null;
   }
 
   ngOnInit() {
   }
 
   login(){
-    console.log(this.username);
-    console.log(this.password);
+    if(this.isValidLogin() && this.userService.userExists(this.username, this.password)){
+      this.userService.login(this.username, this.password);
+      this.router.navigate(["welcome"]);
+    }else{
+      this.errorMessage = "Korisničko ime ili lozinka nisu ispravno uneti!";
+    }
+  }
+
+  isValidLogin(){
+    if(this.username === null || this.username.trim() === "" || 
+        this.password === null || this.password.trim() === "") {
+      return false;
+    }
+    return true;
   }
 
 }
