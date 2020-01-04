@@ -47,12 +47,17 @@ export class UserService {
     UserService.loginUsers.push(user);
   }
 
+  changeCurrentUserData(user: User) {
+    let index = UserService.loginUsers.map(user=>user.username).indexOf(this.currentUser.username);
+    UserService.loginUsers[index] = user;
+  }
+
   private setCurrentUser(user: User){
     localStorage.setItem(UserService.USER_INFO_STORAGE_KEY, JSON.stringify(user));
     this.currentUser = user;
   }
 
-  getCurrentUser(){
+  getCurrentUser(): User{
     if(!this.currentUser){
       this.currentUser = JSON.parse(localStorage.getItem(UserService.USER_INFO_STORAGE_KEY));
     }
