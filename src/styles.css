@@ -1,16 +1,22 @@
+html, body {
+    height:100%;
+}
+
 #footer {
     position: absolute;
-    bottom: 0;
+    bottom: -4.5rem;
     width: 100%;
     height: 4.5rem;  
     background-color: #5B762D;
 }
 
-#content-div{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+#page-container {
+    position: relative;
+    min-height: 79%;
+}
+
+#content-wrap {
+    padding-bottom: 2.5rem;    /* Footer height */
 }
 
 .flex-center{

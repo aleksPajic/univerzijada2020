@@ -9,12 +9,13 @@
   <body>
     <pki-header></pki-header>
     
-    <div class="feature">
-      <div class="container mt-4">
-        <router-outlet id="content-div"></router-outlet>
+    <div id="page-container">
+      <div id="content-wrap">
+        <div class="container mt-4">
+          <router-outlet class="flex-center"></router-outlet>
+        </div>
       </div>
+      <pki-footer id="footer"></pki-footer>
     </div>
-
-    <pki-footer id="footer"></pki-footer>
   </body>
 </html>

@@ -43,6 +43,10 @@ export class UserService {
     return this.getCurrentUser() != null;
   }
 
+  register(user: User) {
+    UserService.loginUsers.push(user);
+  }
+
   private setCurrentUser(user: User){
     localStorage.setItem(UserService.USER_INFO_STORAGE_KEY, JSON.stringify(user));
     this.currentUser = user;
