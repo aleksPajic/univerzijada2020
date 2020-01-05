@@ -12,7 +12,7 @@ export class HeaderComponent implements OnInit {
 
   private headerView: string = "none";
 
-  constructor(public userService: UserService, private router: Router) {
+  constructor(public userService: UserService, public router: Router) {
     this.userService.setHeaderComponent(this);
     console.log("Created header object!");
    }

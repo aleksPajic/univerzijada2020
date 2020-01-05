@@ -10,8 +10,9 @@ export class UserService {
   public static TYPE_STUDENT:string = "student";
   public static TYPE_ORGANISATOR:string = "organisator";
   private static USER_INFO_STORAGE_KEY: string = "univerzijadaUserInfo";
+  private static LOGIN_USERS_ARRAY_KEY: string = "univerzijadaLoginUsersArray";
 
-  static loginUsers:User[] = [
+  static initialLoginUsers:User[] = [
     {
       username: "student1",
       password: "sifra123",
@@ -36,7 +37,9 @@ export class UserService {
   private headerComponent: HeaderComponent;
 
   constructor() { 
-    console.log("User service created!");
+    if(!localStorage.getItem(UserService.LOGIN_USERS_ARRAY_KEY)){
+      this.setLoginUsers(UserService.initialLoginUsers);
+    }
   }
 
   isUserLogged(): boolean{
@@ -44,12 +47,25 @@ export class UserService {
   }
 
   register(user: User) {
-    UserService.loginUsers.push(user);
+    let loginUsers = this.getLoginUsers();
+    loginUsers.push(user);
+    this.setLoginUsers(loginUsers);
+  }
+
+  private getLoginUsers():User[]{
+    return JSON.parse(localStorage.getItem(UserService.LOGIN_USERS_ARRAY_KEY));
+  }
+
+  private setLoginUsers(users:User[]){
+    localStorage.setItem(UserService.LOGIN_USERS_ARRAY_KEY, JSON.stringify(users));
   }
 
   changeCurrentUserData(user: User) {
-    let index = UserService.loginUsers.map(user=>user.username).indexOf(this.currentUser.username);
-    UserService.loginUsers[index] = user;
+    let loginUsers = this.getLoginUsers();
+    let index = loginUsers.map(user=>user.username).indexOf(this.currentUser.username);
+    loginUsers[index] = user;
+    this.setLoginUsers(loginUsers);
+    this.setCurrentUser(user);
   }
 
   private setCurrentUser(user: User){
@@ -71,7 +87,8 @@ export class UserService {
   }
 
   getUserForUsernameAndPassword(username: string, password: string): User{
-    var result = UserService.loginUsers.filter((user)=>{
+    let loginUsers = this.getLoginUsers();
+    var result = loginUsers.filter((user)=>{
       return user.username === username && user.password === password;
     });
 
@@ -79,7 +96,8 @@ export class UserService {
   }
 
   userExists(username: string, password: string): boolean{
-    var result = UserService.loginUsers.filter((user)=>{
+    let loginUsers = this.getLoginUsers();
+    var result = loginUsers.filter((user)=>{
       return user.username === username && user.password === password;
     });
 

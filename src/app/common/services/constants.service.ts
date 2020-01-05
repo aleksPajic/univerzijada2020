@@ -4,7 +4,7 @@ import { Attraction } from 'src/models/attraction';
 @Injectable({
   providedIn: 'root'
 })
-export class TourismService{
+export class ConstantsService {
 
   static attractions: Attraction[] = [
     {
@@ -49,27 +49,7 @@ export class TourismService{
         "../../assets/tasmajdan/Ageratum_tagetes_tasmajdan.jpg",
       ]
     }
-  ]; 
+  ];
 
   constructor() { }
-
-  getAllAttractions(): Attraction[] {
-    return TourismService.attractions;
-  }
-
-  isAttractionLikedByUser(attractionName: string, username: string):boolean{
-    let attraction = TourismService.attractions.filter((x)=> x.name === attractionName)[0];
-    return attraction.likedBy.indexOf(username) >= 0;
-  }
-
-  likeAttraction(attractionName: string, username: string){
-    if(this.isAttractionLikedByUser(attractionName, username)){
-      throw "Attraction already liked";
-    }else{
-      let index = TourismService.attractions.map((x)=> x.name).indexOf(attractionName);
-      if(index >= 0){
-        TourismService.attractions[index].likedBy.push(username);
-      }
-    }
-  }
 }

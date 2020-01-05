@@ -3,6 +3,7 @@ import { UserService } from 'src/services/user.service';
 import { MatchService } from '../match.service';
 import { Router } from '@angular/router';
 import { Match } from 'src/models/mach';
+import { TourismService } from '../tourism.service';
 
 @Component({
   selector: 'app-matches',
@@ -20,7 +21,7 @@ export class MatchesComponent implements OnInit {
   hallForSearch;
   errorMessage: string;
 
-  constructor(public userService: UserService, private matchService: MatchService, private router: Router) {
+  constructor(public userService: UserService, public matchService: MatchService, public ts: TourismService ,public router: Router) {
     if(this.userService.getCurrentUser().type != 'student') {
       this.router.navigate(['/welcome']);
     }

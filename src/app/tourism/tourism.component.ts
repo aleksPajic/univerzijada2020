@@ -23,6 +23,7 @@ export class TourismComponent implements OnInit {
   like(attractionName){
     try{
       this.tourismService.likeAttraction(attractionName, this.userService.getCurrentUser().username);
+      this.attractions = this.tourismService.getAllAttractions();
     }catch(e){
       alert("Već ste lajkovali ovu turističku atrakciju!");
     }
