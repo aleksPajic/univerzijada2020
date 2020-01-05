@@ -1,0 +1,65 @@
+
+<div class="row">
+    <div class="col-8">
+        <h4>Utakmice</h4>
+        <div id="student-matches">
+            <div class="list-item" *ngFor="let match of matches">
+                <b>{{match.name}}</b><br> 
+                {{match.dateTime}}, hala {{match.hall}}
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <h4>Pretraga</h4>
+        <div class="form-group">
+            <label class="input-label">Datum:</label>   
+            <div class="form-group">
+                <div class="input-group">
+                    <input class="form-control" placeholder="yyyy-mm-dd"
+                    name="datepicker" [(ngModel)]="date" 
+                    ngbDatepicker 
+                    #datePickerInput="ngbDatepicker"
+                    [markDisabled]="isDisabled"
+                    [readOnly]='true'
+                    #d="ngbDatepicker"
+                    (click)="datePickerInput.open()">
+                  <div class="input-group-append">
+                        <button class="btn btn-outline-secondary pr-2 pl-2 pt-0 pb-0" (click)="d.toggle()" type="button">
+                            <img id="calendar-icon" src="../../assets/icons8-calendar-100.png"/>
+                        </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="input-label">Vreme od:</label>
+                <input type="number" [(ngModel)]="timeFrom" class="form-control" name="timeFrom">
+              </div>
+
+              <div class="form-group">
+                <label class="input-label">Vreme do:</label>
+                <input type="number" [(ngModel)]="timeTo" class="form-control" name="timeTo">
+              </div>            
+              
+              <div class="form-group">
+                <label class="input-label">Hale:</label>
+                <select class="form-control" [(ngModel)]="hallForSearch">
+                    <option value="" selected>Sve hale</option>
+                    <option *ngFor="let hall of halls" [attr.value]="hall">{{hall}}</option>
+                </select>
+              </div>
+
+              <div *ngIf='errorMessage' class="alert alert-danger" role="alert">
+                {{errorMessage}}
+             </div>
+
+              <div class="flex-center">
+                <button type="submit" (click)="searchMatches()" class="btn btn-primary">Pretraži</button>
+            </div>
+
+            <div class="flex-center">
+                <button (click)="clearSearch()" class="btn btn-danger mt-3">Poništi pretragu</button>
+            </div>
+        </div> 
+    </div>
+</div>
