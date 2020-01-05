@@ -1,1 +1,30 @@
-<p>tourism works!</p>
+<div *ngFor="let attraction of attractions" class="mb-5">
+    <h4>
+        {{attraction.name}}: 
+        <img class="icon" src="../../assets/youtube-facebook-like-button-emoticon-thumbs-up.jpg" (click)="like(attraction.name)"/>
+        {{attraction.likedBy.length}}
+    </h4>
+    <div class="bordered-fill row">
+        <div class="col-4 scrollable">
+            {{attraction.description}}
+        </div>
+        <div class="col-8 scrollable">
+            <div *ngFor="let imageSrc of attraction.images">
+                <img data-toggle="modal" data-target="#showImageModal" class="link-image bordered-fixed "  [attr.src]="imageSrc">
+                <div class="modal fade" id="showImageModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-body">
+                            <img class="big-image" [attr.src]="imageSrc">
+                        </div>
+                        <div class="modal-footer">
+                        <button #closeModal type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
