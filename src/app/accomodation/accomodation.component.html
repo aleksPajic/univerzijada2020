@@ -51,5 +51,50 @@
                 <img class="star-img" [src]="currentRating >= 3 ? fillStarSrc : emptyStarSrc" (click)="setRating(3)"/>
             </div>
         </div>
+
+        <div>
+            <button class="btn btn-danger m-5" data-toggle="modal" data-target="#requestModal">Pošalji zahtev za promenu smeštaja/restorana</button> 
+        </div>
     </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nova lozinka</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label>Promena:</label>
+                    <div class="form-check ml-5">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="radioSmestaj" [(ngModel)]="requestFor" value="smestaj">
+                        <label class="form-check-label" for="radioSmestaj">
+                            smeštaja
+                        </label>
+                    </div>
+                    <div class="form-check ml-5">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="radioRestoran" [(ngModel)]="requestFor" value="restoran">
+                        <label class="form-check-label" for="radioRestoran">
+                            restorana
+                        </label>
+                    </div>
+                </div>
+              
+              <div class="form-group">
+                <label for="usernameInput">Napomena</label>
+                <textarea class="form-control" name="requestNote" [(ngModel)]="requestNote"></textarea>
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button #closeModal type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary" (click)="sendRequest()">Pošalji</button>
+        </div>
+      </div>
+    </div>
+  </div>

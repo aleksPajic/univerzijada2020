@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AccomodationForStudent } from 'src/models/accomodation_for_student';
 import { Accomodation } from 'src/models/accomodation';
+import { Request } from 'src/models/request';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,9 @@ export class AccomodationService {
   private static ACCOMODATIONS_FOR_STUDENTS_ARRAY_KEY:string = "univerzijadaAccomodationsForStudents";
   private static HOTELS_ARRAY_KEY:string = "univerzijadaAccomodationsHotels";
   private static RESTAURANTS_ARRAY_KEY:string = "univerzijadaAccomodationsRestaurants";
+  private static REQUESTS_ARRAY_KEY:string = "univerzijadaRequests";
+
+  static initialRequests: Request[] = [];
 
   static initialHotels: Accomodation[] = [
       {
@@ -91,6 +95,14 @@ export class AccomodationService {
     localStorage.setItem(AccomodationService.RESTAURANTS_ARRAY_KEY, JSON.stringify(restaurants));
   }
 
+  getRequests():Request[]{
+    return JSON.parse(localStorage.getItem(AccomodationService.REQUESTS_ARRAY_KEY));
+  }
+
+  private setRequests(requests:Request[]){
+    localStorage.setItem(AccomodationService.REQUESTS_ARRAY_KEY, JSON.stringify(requests));
+  }
+
   getAccomodationForUser(username: string): AccomodationForStudent {
     let accomodations = this.getAccomodations();
     let result = accomodations.filter((x)=> x.student === username);
@@ -129,5 +141,14 @@ export class AccomodationService {
       student: username
     });
     this.setRestaurants(restaurants);
+  }
+
+  sendChangeRequest(requestFor: string, requestNote: string, username: string) {
+    let requests = this.getRequests();
+    requests.push({
+      student: username,
+      type: requestFor,
+      note: requestNote
+    });
   }
 }

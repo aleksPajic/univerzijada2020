@@ -27,6 +27,8 @@ export class AccomodationComponent implements OnInit {
   fillStarSrc = "../../assets/coloredStar.png";
   showCommentTextArea: boolean;
   commentTextarea: string;
+  requestFor;
+  requestNote;
 
   constructor(public userService: UserService,public accService: AccomodationService, public router: Router) { 
     if(!this.userService.isUserLogged() || this.userService.getCurrentUser().type != 'student'){
@@ -42,6 +44,7 @@ export class AccomodationComponent implements OnInit {
       this.restaurantImpressions = this.accService.getImpressionsForRestaurant(this.accomodation.restaurant.name);
       this.impressions = this.hotelImpressions;
       this.showCommentTextArea = false;
+      this.requestFor = "smestaj";
     }
   }
 
@@ -83,6 +86,16 @@ export class AccomodationComponent implements OnInit {
     this.commentTextarea = "";
     this.currentRating = 0;
   }
+
+
+  sendRequest() {
+    this.accService.sendChangeRequest(this.requestFor, this.requestNote, this.userService.getCurrentUser().username);
+    alert("Zahtev uspesno poslat!");
+    this.requestNote = ""; 
+    this.requestFor = "smestaj";
+  }
+
+  //MAP
 
   @ViewChild('mapRef', {static: false}) mapElement: ElementRef;
 

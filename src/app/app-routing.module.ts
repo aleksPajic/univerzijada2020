@@ -7,6 +7,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MatchesComponent } from './matches/matches.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 import { TourismComponent } from './tourism/tourism.component';
+import { RequestsComponent } from './requests/requests.component';
+import { HallsComponent } from './halls/halls.component';
 
 const routes: Routes = [
   { path: "", component: WelcomeComponent },
@@ -16,7 +18,9 @@ const routes: Routes = [
   { path: "profile", component: ProfileComponent },
   { path: "student/matches", component: MatchesComponent },
   { path: "student/accomodation", component: AccomodationComponent },
-  { path: "student/tourism", component: TourismComponent }
+  { path: "student/tourism", component: TourismComponent },
+  { path: "organiser/requests", component: RequestsComponent },
+  { path: "organiser/halls", component: HallsComponent }
 ];
 
 @NgModule({

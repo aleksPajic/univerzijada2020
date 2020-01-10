@@ -15,6 +15,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { MatchesComponent } from './matches/matches.component';
 import { AccomodationComponent } from './accomodation/accomodation.component';
 import { TourismComponent } from './tourism/tourism.component';
+import { RequestsComponent } from './requests/requests.component';
+import { HallsComponent } from './halls/halls.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { TourismComponent } from './tourism/tourism.component';
     ProfileComponent,
     MatchesComponent,
     AccomodationComponent,
-    TourismComponent
+    TourismComponent,
+    RequestsComponent,
+    HallsComponent
   ],
   imports: [
     AlertModule.forRoot(),
