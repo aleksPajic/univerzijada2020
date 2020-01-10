@@ -24,3 +24,23 @@ html, body {
     justify-content: center;
     align-items: center;
 }
+
+.recycler-div {
+    background-color: #98B663;
+    border: skyblue solid 2px;
+    min-height: 500px;
+    margin-right: 20px;
+    padding: 10px;
+    border-radius: 20px;
+    overflow-y: scroll;
+}
+
+.list-item {
+    background-color: whitesmoke;
+    border: skyblue solid 1px;
+    border-top-left-radius: 20px;
+    height: 80px;
+    padding: 10px;
+    margin-top: 5px;
+    overflow-y: scroll;
+}

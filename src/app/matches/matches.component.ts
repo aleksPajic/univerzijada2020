@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from 'src/services/user.service';
-import { MatchService } from '../match.service';
+import { MatchService } from '../../services/match.service';
 import { Router } from '@angular/router';
 import { Match } from 'src/models/mach';
-import { TourismService } from '../tourism.service';
 
 @Component({
   selector: 'app-matches',
@@ -21,9 +20,9 @@ export class MatchesComponent implements OnInit {
   hallForSearch;
   errorMessage: string;
 
-  constructor(public userService: UserService, public matchService: MatchService, public ts: TourismService ,public router: Router) {
-    if(this.userService.getCurrentUser().type != 'student') {
-      this.router.navigate(['/welcome']);
+  constructor(public userService: UserService, public matchService: MatchService,public router: Router) {
+    if(!this.userService.isUserLogged() || this.userService.getCurrentUser().type != 'student'){
+      router.navigate(["welcome"]);
     }
     this.errorMessage = null;
     this.allMatches = this.matchService.getMatchesForStudent(this.userService.getCurrentUser().username);

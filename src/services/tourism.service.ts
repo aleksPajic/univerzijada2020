@@ -6,6 +6,8 @@ import { Attraction } from 'src/models/attraction';
 })
 export class TourismService{
 
+  private static ATTRACTIONS_ARRAY_KEY: string = "univerzijadaAttractionsKey";
+
   static attractions: Attraction[] = [
     {
       name: "Kalemegdan",
@@ -51,24 +53,35 @@ export class TourismService{
     }
   ]; 
 
-  constructor() { }
+  constructor() {
+    if(!this.getTourismAttractions()){
+      this.setTourismAttractions(TourismService.attractions);
+    }
+  }
 
-  getAllAttractions(): Attraction[] {
-    return TourismService.attractions;
+  getTourismAttractions():Attraction[]{
+    return JSON.parse(localStorage.getItem(TourismService.ATTRACTIONS_ARRAY_KEY));
+  }
+
+  private setTourismAttractions(attractions:Attraction[]){
+    localStorage.setItem(TourismService.ATTRACTIONS_ARRAY_KEY, JSON.stringify(attractions));
   }
 
   isAttractionLikedByUser(attractionName: string, username: string):boolean{
-    let attraction = TourismService.attractions.filter((x)=> x.name === attractionName)[0];
+    let attractions = this.getTourismAttractions();
+    let attraction = attractions.filter((x)=> x.name === attractionName)[0];
     return attraction.likedBy.indexOf(username) >= 0;
   }
 
   likeAttraction(attractionName: string, username: string){
+    let attractions = this.getTourismAttractions();
     if(this.isAttractionLikedByUser(attractionName, username)){
       throw "Attraction already liked";
     }else{
-      let index = TourismService.attractions.map((x)=> x.name).indexOf(attractionName);
+      let index = attractions.map((x)=> x.name).indexOf(attractionName);
       if(index >= 0){
-        TourismService.attractions[index].likedBy.push(username);
+        attractions[index].likedBy.push(username);
+        this.setTourismAttractions(attractions);
       }
     }
   }

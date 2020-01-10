@@ -1,0 +1,25 @@
+.recycler-div {
+    min-height: 250px;
+    max-height: 300px;
+}
+
+.ratingImg {
+    width: 50px;
+    height: 20px;
+}
+
+.list-item {
+    background-color: white;
+    overflow-x: hidden;
+}
+
+.star-img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
+
+#map {
+    height: 200px;
+    width: 200px;
+   }

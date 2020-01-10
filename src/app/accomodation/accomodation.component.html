@@ -1,1 +1,55 @@
-<p>accomodation works!</p>
+<div *ngIf="accomodation" class='row'>
+    <div class="col">
+        <h4>Smeštaj:</h4>
+        <p>
+            {{accomodation.hotel.name}} <br>
+            {{accomodation.hotel.address}}
+        </p>
+        <h4>Restoran:</h4>
+        <p>
+            {{accomodation.restaurant.name}} <br>
+            {{accomodation.restaurant.address}}
+        </p>
+        <div #mapRef style="width:100%;height:400px"></div>
+    </div>
+    <div class="col">
+         <h4>Komentari i ocene</h4>
+         <div class="row mt-3">
+             <div class="col flex-center">
+                <button class="btn btn-success" [disabled]="isHotelImpressionsVisible" (click)="showOtherImpressions()">Smeštaj</button>
+             </div>
+             <div class="col flex-center">
+                <button class="btn btn-warning" [disabled]="!isHotelImpressionsVisible" (click)="showOtherImpressions()">Restoran</button>
+             </div>
+         </div>
+
+         <div class="recycler-div mt-3 mb-3">
+            <div class="list-item" *ngFor="let impression of impressions">
+                <div class="row">
+                    <div class="col-9 pr-3">
+                        <p>{{impression.comment}}</p>
+                    </div>
+                    <div class="2 pl-3 pr-3">
+                        <img class="ratingImg" [src]="starsImgSrcs[impression.rating]"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-8" *ngIf="!showCommentTextArea">
+                <button class="btn btn-primary ml-3" (click)="showCommentTextArea = true">Ostavi komentar</button>
+            </div>
+            <div class="col-8" *ngIf="showCommentTextArea">
+                <div class="form-group">
+                    <textarea class="form-control ml-3" name="commentBox" [(ngModel)]="commentTextarea"></textarea>
+                  </div>
+                <button class="btn btn-primary ml-3" (click)="leaveComment()">Postavi komenatar</button>
+            </div>
+            <div class="col-4">
+                <img class="star-img" [src]="currentRating >= 1 ? fillStarSrc : emptyStarSrc" (click)="setRating(1)"/>
+                <img class="star-img" [src]="currentRating >= 2 ? fillStarSrc : emptyStarSrc" (click)="setRating(2)"/>
+                <img class="star-img" [src]="currentRating >= 3 ? fillStarSrc : emptyStarSrc" (click)="setRating(3)"/>
+            </div>
+        </div>
+    </div>
+</div>
