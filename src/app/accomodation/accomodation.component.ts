@@ -11,6 +11,8 @@ import { AccomodationForStudent } from 'src/models/accomodation_for_student';
 })
 export class AccomodationComponent implements OnInit {
 
+  @ViewChild('closeModal', {static: false}) private closeModal: ElementRef;
+
   accomodation: AccomodationForStudent;
   impressions;
   hotelImpressions;
@@ -89,10 +91,17 @@ export class AccomodationComponent implements OnInit {
 
 
   sendRequest() {
-    this.accService.sendChangeRequest(this.requestFor, this.requestNote, this.userService.getCurrentUser().username);
+    let accName: string;
+    if(this.requestFor == "smestaj") {
+      accName = this.accomodation.hotel.name;
+    } else {
+      accName = this.accomodation.restaurant.name;
+    }
+    this.accService.sendChangeRequest(this.requestFor, this.requestNote, accName,this.userService.getCurrentUser().username);
     alert("Zahtev uspesno poslat!");
     this.requestNote = ""; 
     this.requestFor = "smestaj";
+    this.closeModal.nativeElement.click();
   }
 
   //MAP

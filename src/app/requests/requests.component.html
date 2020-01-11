@@ -1,1 +1,47 @@
-<p>requests works!</p>
+<div *ngIf="!hasRequests">
+    <h3>Nema novih zahteva!</h3>
+</div>
+
+<div *ngIf="hasRequests">
+    <div *ngFor="let request of requests" class="bordered mb-5" >
+        <div class="row">
+            <div class="col-9 center-vertically">
+                <div><b>Student:</b> {{request.student}}</div>
+                <div><b>Promena:</b> ({{request.type}}) {{request.accomodationName}}</div>
+                <div *ngIf="request.note"><b>Napomena:</b> {{request.note}}</div>
+            </div>
+            <div class="col-3">
+                <button class="btn btn-primary m-3 btn-fixed" data-toggle="modal" data-target="#requestModal" (click)="setRequestToAccept(request)">Prihvati</button> <br/>
+                <button class="btn btn-danger m-3 btn-fixed" (click)="denyRequest(request)">Odbij</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="requestModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Novi {{currentRequest ? currentRequest.type: ""}}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+            <div class="form-group">
+                <label for="usernameInput">Naziv:</label>
+                <input type="text" [(ngModel)]="newAccomodationName" class="form-control" name="newAccccName">
+              </div>
+              <div class="form-group">
+                <label for="usernameInput">Adresa:</label>
+                <input type="text" [(ngModel)]="newAccomodationAddress" class="form-control" name="newAccccAddress">
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button #closeModal type="button" class="btn btn-secondary" data-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-primary" (click)="acceptRequest(currentRequest)">Sačuvaj</button>
+        </div>
+      </div>
+    </div>
+  </div>
