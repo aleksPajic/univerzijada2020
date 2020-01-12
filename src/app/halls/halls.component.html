@@ -1,1 +1,30 @@
-<p>halls works!</p>
+<div class="row">
+
+    <div class="col">
+        <div class="recycler-div">
+            <div class="list-item selectable" *ngFor="let match of matchesWithoutHalls; let i = index" (click)="showFreeHalls(i)">
+                <b>{{match.name}}</b><br> 
+                {{match.dateTime}}
+            </div>
+        </div>
+    </div>
+
+    <div class="col">
+        <div class="recycler-div">
+            <div class="list-item" *ngFor="let hall of hallsToShow">
+                <div class="row mt-2">
+                    <div class="col-8">
+                        {{hall}}
+                    </div>
+                    <div class="col-4">
+                        <button class="btn btn-primary" (click)="makeReservation(hall)">Rezerviši</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="noHallsMessage">
+                <h3 class="m-3" id="link-message" (click)="sendHallRequest()">{{noHallsMessage}}</h3>
+            </div>
+        </div>
+    </div>
+
+</div>

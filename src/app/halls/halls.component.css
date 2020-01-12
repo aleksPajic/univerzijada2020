@@ -1,0 +1,19 @@
+.selectable:hover {
+    background-color: skyblue;
+    cursor: pointer;
+}
+
+.list-item {
+    overflow-x: hidden;
+    overflow-y: hidden;
+    border-radius: 10px;
+}
+
+#link-message {
+    color: white;
+}
+
+#link-message:hover {
+    color: skyblue;
+    cursor: pointer;
+}

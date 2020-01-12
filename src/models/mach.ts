@@ -1,5 +1,6 @@
 export interface Match {
     name: string,
     dateTime: Date,
-    hall: string
+    hall: string,
+    durationInMinutes: number
 }
